@@ -1,4 +1,4 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { interval, take } from 'rxjs';
  
@@ -12,13 +12,23 @@ export class VerificationCodeInputComponent {
 
   private _enableVerificationCode: boolean;
 
+  private _maxSeconds: number;
+
   @Input()
+  public set initialEnableVerificationCode(_enableVerificationCode: boolean) {
+    this._enableVerificationCode = coerceBooleanProperty(_enableVerificationCode);
+  }
+ 
   public set enableVerificationCode(_enableVerificationCode: boolean) {
     this._enableVerificationCode = coerceBooleanProperty(_enableVerificationCode);
   }
 
   public get enableVerificationCode() {
     return this._enableVerificationCode;
+  }
+
+  public set maxSeconds(_maxSeconds: number) {
+    this._maxSeconds = coerceNumberProperty(_maxSeconds);
   }
 
   @Output()
@@ -28,22 +38,24 @@ export class VerificationCodeInputComponent {
   
   constructor() {
     this._enableVerificationCode = false;
+    this._maxSeconds = 60;
   }
 
   clickVerificationCodeButton() {
-    this.verificationCodeMsg = "60秒后可重发";
+    this.enableVerificationCode = false;
+    this.verificationCodeMsg = `${this._maxSeconds}秒后可重发`;
     const numbers = interval(1000);
-    const takeFourNumbers = numbers.pipe(take(59));
+    const takeFourNumbers = numbers.pipe(take(this.maxSeconds -1));
     this.verificationCodeChange.next(undefined);
     takeFourNumbers.subscribe({
       next: (x) => {
-        this.verificationCodeMsg = (59 - x) + "秒后可重发";
-        this._enableVerificationCode = false;
+        this.verificationCodeMsg = (this.maxSeconds -1 - x) + '秒后可重发';
+        this.enableVerificationCode = false;
       },
       error: (e) => console.error(e),
       complete: () => {
-        this.verificationCodeMsg = "重新发送验证码";
-        this._enableVerificationCode = true;
+        this.verificationCodeMsg = '重新发送验证码';
+        this.enableVerificationCode = true;
       }
     });
   }
