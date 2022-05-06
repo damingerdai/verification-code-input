@@ -1,14 +1,14 @@
 <mat-toolbar color="primary">
-    <span>验证码输入框</span>
+    <span>{{title}}</span>
 </mat-toolbar>
 
 <section class="section">
     <div style="margin: 0 auto">
-        <mat-checkbox #check>开启验证码</mat-checkbox>
+        <mat-checkbox [formControl]="enableVerificationCodeFormControl">开启验证码</mat-checkbox>
     </div>
 </section>
 <section class="section">
     <div style="margin: 0 auto">
-        <verification-code-input [enableVerificationCode]="!check.checked"></verification-code-input>
+        <verification-code-input [enableVerificationCode]="!enableVerificationCodeFormControl.value" (verificationCodeChange)="verificationCodeChange()"></verification-code-input>
     </div>
 </section>
