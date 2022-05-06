@@ -1,20 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Component, Input } from '@angular/core';
+import { interval, take } from 'rxjs';
+ 
 
 @Component({
-  selector: 'lib-verification-code-input',
-  template: `
-    <p>
-      verification-code-input works!
-    </p>
-  `,
-  styles: [
-  ]
+  selector: 'verification-code-input',
+  templateUrl: './verification-code-input.component.html',
+  styleUrls: ['./verification-code-input.component.scss'],
 })
-export class VerificationCodeInputComponent implements OnInit {
+export class VerificationCodeInputComponent {
 
-  constructor() { }
+  private _enableVerificationCode: boolean;
 
-  ngOnInit(): void {
+  @Input()
+  public set enableVerificationCode(_enableVerificationCode: boolean) {
+    this._enableVerificationCode = coerceBooleanProperty(_enableVerificationCode);
   }
 
+  public get enableVerificationCode() {
+    return this._enableVerificationCode;
+  }
+
+  public verificationCodeMsg: string = '获取验证码';
+  
+  constructor() {
+    this._enableVerificationCode = false;
+  }
+
+  clickVerificationCodeButton() {
+    this.verificationCodeMsg = "60秒后可重发";
+    const numbers = interval(1000);
+    const takeFourNumbers = numbers.pipe(take(59));
+    takeFourNumbers.subscribe({
+      next: (x) => {
+        this.verificationCodeMsg = (59 - x) + "秒后可重发";
+        // this._enableVerificationCode = false;
+      },
+      error: (e) => console.error(e),
+      complete: () => {
+        this.verificationCodeMsg = "重新发送验证码";
+        // this._enableVerificationCode = true;
+      }
+    });
+  }
 }
