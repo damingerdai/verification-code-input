@@ -1,5 +1,6 @@
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { MatFormFieldAppearance, MatFormFieldDefaultOptions, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { interval, take } from 'rxjs';
  
 
@@ -14,6 +15,8 @@ export class VerificationCodeInputComponent {
 
   private _maxSeconds: number;
 
+  private _appearance: MatFormFieldAppearance;
+
   @Input()
   public set initialEnableVerificationCode(_enableVerificationCode: boolean) {
     this._enableVerificationCode = coerceBooleanProperty(_enableVerificationCode);
@@ -27,6 +30,15 @@ export class VerificationCodeInputComponent {
     return this._enableVerificationCode;
   }
 
+  @Input()
+  public set appearance(_appearance: MatFormFieldAppearance) {
+    this._appearance = _appearance;
+  }
+
+  public get appearance() {
+    return this._appearance
+  }
+
   public set maxSeconds(_maxSeconds: number) {
     this._maxSeconds = coerceNumberProperty(_maxSeconds);
   }
@@ -36,9 +48,14 @@ export class VerificationCodeInputComponent {
 
   public verificationCodeMsg: string = '获取验证码';
   
-  constructor() {
+  constructor(
+    @Inject(MAT_FORM_FIELD_DEFAULT_OPTIONS)
+    private _defaults: MatFormFieldDefaultOptions,
+  ) {
     this._enableVerificationCode = false;
     this._maxSeconds = 60;
+    // Set the default through here so we invoke the setter on the first run.
+    this._appearance = _defaults?.appearance || 'legacy';
   }
 
   clickVerificationCodeButton() {

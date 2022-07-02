@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { VerificationCodeInputComponent } from './verification-code-input.component';
 
@@ -18,6 +18,9 @@ import { VerificationCodeInputComponent } from './verification-code-input.compon
     MatIconModule,
     MatFormFieldModule,
     MatInputModule
+  ],
+  providers: [
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'legacy'}}
   ],
   exports: [
     VerificationCodeInputComponent
