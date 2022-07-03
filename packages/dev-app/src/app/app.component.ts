@@ -21,7 +21,6 @@ export class AppComponent {
   }
 
 
-
   constructor(
     private fb: FormBuilder
   ) {
@@ -29,6 +28,7 @@ export class AppComponent {
       enableVerificationCode: [false],
       appearance: ['legacy']
     });
+
   }
 
   verificationCodeChange() {

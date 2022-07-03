@@ -2,7 +2,7 @@ import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coerci
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { MatFormFieldAppearance, MatFormFieldDefaultOptions, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { interval, take } from 'rxjs';
- 
+
 
 @Component({
   selector: 'verification-code-input',
@@ -21,7 +21,7 @@ export class VerificationCodeInputComponent {
   public set initialEnableVerificationCode(_enableVerificationCode: boolean) {
     this._enableVerificationCode = coerceBooleanProperty(_enableVerificationCode);
   }
- 
+
   public set enableVerificationCode(_enableVerificationCode: boolean) {
     this._enableVerificationCode = coerceBooleanProperty(_enableVerificationCode);
   }
@@ -36,18 +36,22 @@ export class VerificationCodeInputComponent {
   }
 
   public get appearance() {
-    return this._appearance
+    return this._appearance;
   }
 
   public set maxSeconds(_maxSeconds: number) {
     this._maxSeconds = coerceNumberProperty(_maxSeconds);
   }
 
+  public get maxSeconds() {
+    return isNaN(this._maxSeconds) ? 60 : this._maxSeconds;
+  }
+
   @Output()
   public verificationCodeChange = new EventEmitter();
 
   public verificationCodeMsg: string = '获取验证码';
-  
+
   constructor(
     @Inject(MAT_FORM_FIELD_DEFAULT_OPTIONS)
     private _defaults: MatFormFieldDefaultOptions,
@@ -62,10 +66,11 @@ export class VerificationCodeInputComponent {
     this.enableVerificationCode = false;
     this.verificationCodeMsg = `${this._maxSeconds}秒后可重发`;
     const numbers = interval(1000);
-    const takeFourNumbers = numbers.pipe(take(this.maxSeconds -1));
+    const takeFourNumbers = numbers.pipe(take(this.maxSeconds - 1));
     this.verificationCodeChange.next(undefined);
     takeFourNumbers.subscribe({
       next: (x) => {
+        console.log(x);
         this.verificationCodeMsg = (this.maxSeconds -1 - x) + '秒后可重发';
         this.enableVerificationCode = false;
       },
@@ -76,4 +81,5 @@ export class VerificationCodeInputComponent {
       }
     });
   }
+
 }
