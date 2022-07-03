@@ -6,10 +6,11 @@ import {
   waitForAsync,
 } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { VerificationCodeInputModule } from './verification-code-input.module';
-
-import { VerificationCodeInputComponent } from './verification-code-input.component';
 import { By } from '@angular/platform-browser';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
+import { VerificationCodeInputModule } from './verification-code-input.module';
+import { VerificationCodeInputComponent } from './verification-code-input.component';
+
 
 describe('VerificationCodeInputComponent', () => {
   let component: VerificationCodeInputComponent;
@@ -75,4 +76,15 @@ describe('VerificationCodeInputComponent', () => {
     expect(component.verificationCodeMsg).toContain(`重新发送验证码`);
     expect(component.enableVerificationCode).toBeTrue();
   }));
+
+  it('set appearance style', () => {
+    const appearances = ['legacy', 'standard', 'fill', 'outline'] as MatFormFieldAppearance[];
+    for (const appearance of appearances) {
+      component.appearance = appearance;
+      fixture.detectChanges();
+      const matFormFieldDebugElement = fixture.debugElement.query(By.css('mat-form-field'))!;
+      expect(matFormFieldDebugElement.attributes['ng-reflect-appearance']).toBe(appearance);
+      expect(matFormFieldDebugElement.classes[`mat-form-field-appearance-${appearance}`]).toBeTrue();
+    }
+  })
 });
