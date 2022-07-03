@@ -66,18 +66,20 @@ export class VerificationCodeInputComponent {
     this.enableVerificationCode = false;
     this.verificationCodeMsg = `${this._maxSeconds}秒后可重发`;
     const numbers = interval(1000);
-    const takeFourNumbers = numbers.pipe(take(this.maxSeconds - 1));
+    const takeFourNumbers = numbers.pipe(take(this.maxSeconds));
     this.verificationCodeChange.next(undefined);
-    takeFourNumbers.subscribe({
+    const sub = takeFourNumbers.subscribe({
       next: (x) => {
-        console.log(x);
-        this.verificationCodeMsg = (this.maxSeconds -1 - x) + '秒后可重发';
+        this.verificationCodeMsg = (this.maxSeconds - 1 - x) + '秒后可重发';
         this.enableVerificationCode = false;
       },
       error: (e) => console.error(e),
       complete: () => {
         this.verificationCodeMsg = '重新发送验证码';
         this.enableVerificationCode = true;
+        if (sub) {
+          sub.unsubscribe();
+        }
       }
     });
   }
