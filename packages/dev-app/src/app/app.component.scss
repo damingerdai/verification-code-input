@@ -1,6 +1,23 @@
-.section {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    height: 60px;
+.center {
+  margin: 0 auto
+}
+
+.content {
+  padding: {
+    left: .5rem;
+    right: .5rem;
+  };
+  margin: 8px auto;
+
+  max-width: 300px;
+
+  .m-t-8 {
+    margin: {
+      top: 8px;
+    };
+  }
+
+  .w-full {
+    width: 100%;
+  }
 }

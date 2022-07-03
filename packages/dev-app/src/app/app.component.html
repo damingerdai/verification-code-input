@@ -1,14 +1,26 @@
 <mat-toolbar color="primary">
-    <span>{{title}}</span>
+  <span>{{title}}</span>
 </mat-toolbar>
 
-<section class="section">
-    <div style="margin: 0 auto">
-        <mat-checkbox [formControl]="enableVerificationCodeFormControl">开启验证码</mat-checkbox>
-    </div>
+<section class="content" [formGroup]="form">
+  <mat-card class="w-full">
+    <mat-form-field class="w-full m-t-8" appearance="outline">
+      <mat-label>应用外观样式</mat-label>
+      <mat-select formControlName="appearance" placeholder="选择应用外观样式">
+        <mat-option value="legacy">legacy</mat-option>
+        <mat-option value="standard">standard</mat-option>
+        <mat-option value="fill">fill</mat-option>
+        <mat-option value="outline">outline</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="enableVerificationCode">开启验证码</mat-checkbox>
+  </mat-card>
 </section>
-<section class="section">
-    <div style="margin: 0 auto">
-        <verification-code-input [initialEnableVerificationCode]="enableVerificationCodeFormControl.value" (verificationCodeChange)="verificationCodeChange()"></verification-code-input>
-    </div>
+<section class="content">
+  <mat-card class="w-full">
+    <verification-code-input class="w-full" [appearance]="appearance?.value"
+      [initialEnableVerificationCode]="enableVerificationCode?.value"
+      (verificationCodeChange)="verificationCodeChange()"></verification-code-input>
+  </mat-card>
 </section>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +8,27 @@ import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 })
 export class AppComponent {
 
-  enableVerificationCodeFormControl: UntypedFormControl;
+  protected form: FormGroup;
 
-  title = '验证码输入框';
+  protected title = '验证码输入框';
+
+  public get enableVerificationCode() {
+    return this.form.get('enableVerificationCode');
+  }
+
+  public get appearance() {
+    return this.form.get('appearance');
+  }
+
+
 
   constructor(
-    private fb: UntypedFormBuilder
+    private fb: FormBuilder
   ) {
-    this.enableVerificationCodeFormControl = this.fb.control(false);
+    this.form = this.fb.group({
+      enableVerificationCode: [false],
+      appearance: ['legacy']
+    });
   }
 
   verificationCodeChange() {
