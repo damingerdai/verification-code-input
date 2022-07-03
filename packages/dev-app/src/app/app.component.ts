@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +8,12 @@ import { FormBuilder, FormControl } from '@angular/forms';
 })
 export class AppComponent {
 
-  enableVerificationCodeFormControl: FormControl;
+  enableVerificationCodeFormControl: UntypedFormControl;
 
   title = '验证码输入框';
 
   constructor(
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.enableVerificationCodeFormControl = this.fb.control(false);
   }
