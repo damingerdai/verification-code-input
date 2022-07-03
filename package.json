@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build verification-code-input --watch --configuration development",
-    "test": "ng test verification-code-input"
+    "test:lib": "ng test verification-code-input",
+    "test:lib:ci": "ng test verification-code-input --browsers=ChromeHeadless --watch=false --code-coverage"
   },
   "private": true,
   "dependencies": {
