@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build:application": "ng build dev-app",
+    "build:lib": "ng build verification-code-input",
+    "build": "yarn build:application && yarn build:lib",
     "watch": "ng build verification-code-input --watch --configuration development",
     "test:lib": "ng test verification-code-input",
     "test:lib:ci": "ng test verification-code-input --browsers=ChromeHeadless --watch=false --code-coverage"
