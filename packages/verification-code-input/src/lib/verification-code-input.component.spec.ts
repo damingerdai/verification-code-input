@@ -87,4 +87,13 @@ describe('VerificationCodeInputComponent', () => {
       expect(matFormFieldDebugElement.classes[`mat-form-field-appearance-${appearance}`]).toBeTrue();
     }
   })
+
+  it('set placeholder', () => {
+    const placeholder = new Date().getTime() + '@daming';
+    component.placeholder = placeholder;
+    fixture.detectChanges();
+    const labelEl = fixture.debugElement.query(By.css('label'))!;
+    expect(labelEl).not.toBeNull();
+    expect(labelEl.nativeElement.textContent).toBe(placeholder);
+  })
 });
