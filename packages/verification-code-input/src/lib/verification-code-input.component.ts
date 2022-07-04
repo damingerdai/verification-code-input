@@ -17,6 +17,8 @@ export class VerificationCodeInputComponent {
 
   private _appearance: MatFormFieldAppearance;
 
+  private _placeholder: string;
+
   @Input()
   public set initialEnableVerificationCode(_enableVerificationCode: boolean) {
     this._enableVerificationCode = coerceBooleanProperty(_enableVerificationCode);
@@ -31,6 +33,15 @@ export class VerificationCodeInputComponent {
   }
 
   @Input()
+  public set maxSeconds(_maxSeconds: number) {
+    this._maxSeconds = coerceNumberProperty(_maxSeconds);
+  }
+
+  public get maxSeconds() {
+    return isNaN(this._maxSeconds) ? 60 : this._maxSeconds;
+  }
+
+  @Input()
   public set appearance(_appearance: MatFormFieldAppearance) {
     this._appearance = _appearance;
   }
@@ -39,13 +50,15 @@ export class VerificationCodeInputComponent {
     return this._appearance;
   }
 
-  public set maxSeconds(_maxSeconds: number) {
-    this._maxSeconds = coerceNumberProperty(_maxSeconds);
+  @Input()
+  public set placeholder(_placeholder: string) {
+    this._placeholder = _placeholder;
   }
 
-  public get maxSeconds() {
-    return isNaN(this._maxSeconds) ? 60 : this._maxSeconds;
+  public get placeholder() {
+    return this._placeholder;
   }
+
 
   @Output()
   public verificationCodeChange = new EventEmitter();
@@ -60,6 +73,7 @@ export class VerificationCodeInputComponent {
     this._maxSeconds = 60;
     // Set the default through here so we invoke the setter on the first run.
     this._appearance = _defaults?.appearance || 'legacy';
+    this._placeholder = '';
   }
 
   clickVerificationCodeButton() {

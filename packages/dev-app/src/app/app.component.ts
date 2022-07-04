@@ -20,13 +20,18 @@ export class AppComponent {
     return this.form.get('appearance');
   }
 
+  public get placeholder() {
+    return this.form.get('placeholder');
+  }
+
 
   constructor(
     private fb: FormBuilder
   ) {
     this.form = this.fb.group({
       enableVerificationCode: [false],
-      appearance: ['legacy']
+      appearance: ['legacy'],
+      placeholder: ['请输入验证码'],
     });
 
   }

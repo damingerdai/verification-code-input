@@ -14,12 +14,17 @@
       </mat-select>
     </mat-form-field>
 
+    <mat-form-field class="w-full m-t-8" appearance="outline">
+      <mat-label>占位符</mat-label>
+      <input matInput type="text" formControlName="placeholder">
+    </mat-form-field>
     <mat-checkbox formControlName="enableVerificationCode">开启验证码</mat-checkbox>
+
   </mat-card>
 </section>
 <section class="content">
   <mat-card class="w-full">
-    <verification-code-input class="w-full" [appearance]="appearance?.value"
+    <verification-code-input class="w-full" [appearance]="appearance?.value" [placeholder]="placeholder?.value"
       [initialEnableVerificationCode]="enableVerificationCode?.value"
       (verificationCodeChange)="verificationCodeChange()"></verification-code-input>
   </mat-card>
