@@ -1,5 +1,17 @@
 <mat-toolbar color="primary">
   <span>{{title}}</span>
+  <div class="flex-spacer"></div>
+  <a
+    mat-icon-button
+    href="https://github.com/damingerdai/verification-code-input"
+    aria-label="GitHub Repository"
+  >
+    <img
+      class="logo"
+      src="../assets/github-circle-white-transparent.svg"
+      alt="verification-code-input"
+    />
+  </a>
 </mat-toolbar>
 
 <section class="content" [formGroup]="form">
