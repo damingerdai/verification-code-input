@@ -1,6 +1,6 @@
 # Verification Code Input
 
-[img](https://raw.githubusercontent.com/damingerdai/verification-code-input/master/img.png)
+![img](https://raw.githubusercontent.com/damingerdai/verification-code-input/master/img.png)
 
 ## Demo
 
