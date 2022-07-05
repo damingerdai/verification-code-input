@@ -1,7 +1,4 @@
 {
   "version": 2,
-  "public": true,
-  "routes": [
-      { "src": "/.*", "dest": "api/main.py" }
-  ]
+  "public": true
 }
