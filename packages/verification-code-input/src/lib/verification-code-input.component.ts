@@ -1,6 +1,6 @@
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
-import { MatLegacyFormFieldAppearance as MatFormFieldAppearance, MatLegacyFormFieldDefaultOptions as MatFormFieldDefaultOptions, MAT_LEGACY_FORM_FIELD_DEFAULT_OPTIONS as MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/legacy-form-field';
+import { MatFormFieldAppearance, MatFormFieldDefaultOptions,  MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { interval, take } from 'rxjs';
 
 
@@ -72,7 +72,7 @@ export class VerificationCodeInputComponent {
     this._enableVerificationCode = false;
     this._maxSeconds = 60;
     // Set the default through here so we invoke the setter on the first run.
-    this._appearance = _defaults?.appearance || 'legacy';
+    this._appearance = this._defaults?.appearance || 'fill';
     this._placeholder = '';
   }
 

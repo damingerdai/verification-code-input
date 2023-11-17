@@ -24,8 +24,9 @@
     ],
     "paths": {
       "verification-code-input": [
-        "dist/verification-code-input/verification-code-input",
-        "dist/verification-code-input"
+        "./packages/verification-code-input/src",
+        "./packages/verification-code-input/src/public-api",
+        "./packages/verification-code-input/src/*"
       ]
     },
     "useDefineForClassFields": false

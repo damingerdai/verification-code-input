@@ -30,7 +30,7 @@ export class AppComponent {
   ) {
     this.form = this.fb.group({
       enableVerificationCode: [false],
-      appearance: ['legacy'],
+      appearance: ['fill'],
       placeholder: ['请输入验证码'],
     });
 

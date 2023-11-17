@@ -1,5 +1,5 @@
 <mat-form-field [appearance]="appearance">
     <input matInput type="text" [placeholder]="placeholder" />
-    <button class="verification-code-input-button" mat-flat-button matSuffix [disabled]="!enableVerificationCode"
+    <button mat-flat-button matSuffix [disabled]="!enableVerificationCode"
         color="primary" (click)="clickVerificationCodeButton()">{{verificationCodeMsg}}</button>
 </mat-form-field>

@@ -7,7 +7,7 @@ import {
 } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
-import { MatLegacyFormFieldAppearance as MatFormFieldAppearance } from '@angular/material/legacy-form-field';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { VerificationCodeInputModule } from './verification-code-input.module';
 import { VerificationCodeInputComponent } from './verification-code-input.component';
 
