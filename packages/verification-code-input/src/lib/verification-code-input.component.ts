@@ -1,13 +1,28 @@
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
-import { MatFormFieldAppearance, MatFormFieldDefaultOptions,  MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldAppearance, MatFormFieldDefaultOptions,  MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { interval, take } from 'rxjs';
 
 
 @Component({
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule
+  ],
   selector: 'verification-code-input',
   templateUrl: './verification-code-input.component.html',
   styleUrls: ['./verification-code-input.component.scss'],
+  providers: [
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
+  ],
+  standalone: true,
 })
 export class VerificationCodeInputComponent {
 
