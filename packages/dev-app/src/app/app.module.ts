@@ -12,6 +12,7 @@ import { VerificationCodeInputModule } from 'verification-code-input';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatCheckboxModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatIconModule,
     MatInputModule,
     MatToolbarModule,
     ReactiveFormsModule,

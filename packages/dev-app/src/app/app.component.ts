@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -26,14 +28,16 @@ export class AppComponent {
 
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer,
   ) {
     this.form = this.fb.group({
       enableVerificationCode: [false],
       appearance: ['fill'],
       placeholder: ['请输入验证码'],
     });
-
+    this.iconRegistry.addSvgIcon('github', this.sanitizer.bypassSecurityTrustResourceUrl('../assets/github-circle-white-transparent.svg'));
   }
 
   verificationCodeChange() {
